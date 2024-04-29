@@ -1,6 +1,7 @@
 package AlkemyToDoList.AlkemyToDoList.TaskList.services;
 
 import AlkemyToDoList.AlkemyToDoList.TaskList.model.Task;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class TaskService implements TaskInterface {
+
     private List<Task> tasks = new ArrayList<>();
 
     public void loadTasks() {
@@ -26,6 +28,7 @@ public class TaskService implements TaskInterface {
         tasks.add(t6);
     }
 
+
     public TaskService(){
         loadTasks();
     }
@@ -40,7 +43,7 @@ public class TaskService implements TaskInterface {
     @Override
     public Task getTaskListById(int id) {
         if (id >= 0 && id < tasks.size()) {
-            return tasks.get(id);
+           return  tasks.stream().filter(task -> task.getId() == id).findFirst().get();
         } else {
             throw new NoSuchElementException("El id no existe");
         }
@@ -83,7 +86,7 @@ public class TaskService implements TaskInterface {
     // -- Elimino todas las tareas
     @Override
     public List<Task> deleteAllTasks() {
-        tasks.clear();
+        tasks.removeAll(tasks);
         return tasks;
     }
 

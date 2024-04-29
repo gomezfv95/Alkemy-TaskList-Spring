@@ -21,6 +21,8 @@ public interface  TaskInterface {
 
     // Eliminar una tarea
         List<Task> deleteAllTasks();
+
+    // Eliminar todas las tareas
         List<Task> deleteTaskById(int id);
 
 }

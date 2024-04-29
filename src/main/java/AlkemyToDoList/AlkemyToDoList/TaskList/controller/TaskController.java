@@ -15,10 +15,11 @@ public class TaskController {
     private TaskService taskService;
 
     //-- Get All Tasks
-    @GetMapping("/AllTask")
+    @GetMapping()
     public List<Task> getTasks() {
         return taskService.getTaskList();
     }
+
 
     //-- Get task  by ID
     @GetMapping("/{id}")
@@ -34,13 +35,13 @@ public class TaskController {
 
 
     //-- Update  task  by ID
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public List<Task> updateTaskStatus(@PathVariable int id, @RequestBody String updatedTaskStatus){
         return taskService.updateTaskStatus(id,updatedTaskStatus);
     }
 
     //-- Delete task  by ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteTaskdeleteTaskById(@PathVariable int id) {
         taskService.deleteTaskById(id);
     }
